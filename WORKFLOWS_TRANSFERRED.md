@@ -2,7 +2,7 @@
 
 ## Summary
 
-All GitHub Actions workflows and CI/CD configurations have been successfully transferred from `Checkmate-Escrow` to the appropriate StellaRust projects.
+All GitHub Actions workflows and CI/CD configurations have been successfully transferred from the original repository to the appropriate StellaRust projects.
 
 ---
 

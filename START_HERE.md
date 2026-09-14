@@ -48,7 +48,7 @@ The StellaRust project (formerly Checkmate-Escrow) has been **successfully divid
    - TypeScript codebase
    - **Status**: Ready to run (needs Node.js installed)
 
-### 3. **Checkmate-Escrow/** 📦
+### 3. **StellaRust-Original/** 📦
    - Original repository (preserved for historical reference only)
 
 ---
@@ -151,7 +151,7 @@ npm run build                       # Build for production
 
 ## 💡 Key Points
 
-✅ **Original preserved** - `Checkmate-Escrow/` is archived for reference  
+✅ **Original preserved** - `StellaRust-Original/` is archived for reference  
 ✅ **Backend ready** - Just needs Rust installed  
 ✅ **Frontend ready** - Just needs Node.js installed  
 ✅ **Fully documented** - 7 guides created  

@@ -1,0 +1,55 @@
+# Build artifacts
+target/
+/coverage/
+
+# Python bytecode (scripts/doc_conformance)
+__pycache__/
+*.pyc
+
+# Environment secrets
+.env
+
+# Test snapshots (Rust-side scratch dirs from contracts/*/src/tests/snapshots.rs
+# fixtures — unrelated to frontend Vitest snapshots, which ARE committed:
+# gitignoring **/*.snap here previously meant frontend/src/**/__snapshots__/*.snap
+# was never checked in, so every CI run started with no baseline and Vitest's
+# CI-mode (triggered by the CI env var GitHub Actions sets) failed instead of
+# writing one -- CI's frontend test job failed on every single push as a
+# result. Locally (no CI env var) Vitest silently wrote fresh snapshots and
+# reported a pass, which is why this went unnoticed.
+**/test_snapshots/
+
+# IDE / editor
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# TLA+ model checking (scripts/check_tla.sh): cached tools and TLC scratch output
+specs/tla/.tools/
+specs/tla/states/
+specs/tla/*.old
+*.st
+
+# Wasm build output
+*.wasm
+
+# Lock file (optional — remove if you want to commit it)
+# Cargo.lock
+
+# Task files
+task1.md
+
+# Mutation testing artifacts
+mutants.out/
+mutants.out.old/
+
+# CI-generated reports (security-scanning.yml, ci.yml, scripts/benchmark.sh,
+# scripts/security-scan.sh) — uploaded as workflow artifacts, not committed
+reports/

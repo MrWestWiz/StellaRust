@@ -46,7 +46,7 @@ After:  https://github.com/MrWestWiz/StellaRust
 
 ## 📂 Preserved Original
 
-The `Checkmate-Escrow/` directory remains **untouched** as historical reference:
+The `StellaRust-Original/` directory remains **untouched** as historical reference:
 - Contains original repository structure
 - Preserved for historical context
 - Not part of active development
@@ -73,7 +73,7 @@ After:  [![Code Coverage](https://github.com/MrWestWiz/StellaRust/actions/workfl
 ## 🔍 What Was NOT Changed
 
 ### Preserved for Historical Context:
-- ✅ `Checkmate-Escrow/` directory (original repository)
+- ✅ `StellaRust-Original/` directory (original repository)
 - ✅ Commit history messages
 - ✅ Git submodule references
 - ✅ Historical documentation references

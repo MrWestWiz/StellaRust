@@ -11,7 +11,7 @@ StellaRust/
 ├── 📄 CODEBASE_SPLIT_SUMMARY.md    # Detailed split documentation
 ├── 📄 README.md                     # This file
 │
-├── 📂 Checkmate-Escrow/             # ✅ Original repository (archived)
+├── 📂 StellaRust-Original/           # ✅ Original repository (archived)
 │   └── Historical reference - use StellaRust-Backend/Frontend instead
 │
 ├── 📂 StellaRust-Backend/           # 🚀 Backend (Rust + Smart Contracts)
@@ -202,7 +202,7 @@ npm run dev
 
 ## 📦 Original Repository
 
-The original repository is preserved in `Checkmate-Escrow/` for historical reference only. All active development should use `StellaRust-Backend/` and `StellaRust-Frontend/`.
+The original repository is preserved in `StellaRust-Original/` for historical reference only. All active development should use `StellaRust-Backend/` and `StellaRust-Frontend/`.
 
 **Original Source:** https://github.com/StellarCheckMate/Checkmate-Escrow.git  
 **Active Repository:** https://github.com/MrWestWiz/StellaRust

@@ -48,7 +48,7 @@ StellaRust/                             ← Workspace root
 ├── 📄 COMPLETION_REPORT.md             ← Original completion report
 ├── 📄 PROJECT_RENAME_COMPLETE.md       ← This file
 │
-├── 📂 Checkmate-Escrow/                ← Original monorepo (unchanged)
+├── 📂 StellaRust-Original/           ← Original monorepo (archived)
 │
 ├── 📂 StellaRust-Backend/              ← 🚀 Rust Backend (RENAMED)
 │   ├── contracts/
@@ -104,7 +104,7 @@ npm run dev
 ## What Stayed the Same
 
 ✅ **All code unchanged** - Only directory names changed  
-✅ **Original preserved** - Checkmate-Escrow/ untouched  
+✅ **Original preserved** - StellaRust-Original/ archived  
 ✅ **Functionality intact** - Everything works the same  
 ✅ **Build processes** - Same commands, same outputs  
 
