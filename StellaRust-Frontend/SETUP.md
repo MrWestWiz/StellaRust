@@ -1,6 +1,6 @@
 # StellaRust Frontend
 
-This is the **frontend portion** of the Checkmate-Escrow project - a React/TypeScript web application for interacting with the Checkmate-Escrow smart contracts.
+This is the **frontend portion** of the StellaRust project - a React/TypeScript web application for interacting with the StellaRust smart contracts.
 
 ## Project Structure
 

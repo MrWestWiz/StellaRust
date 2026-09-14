@@ -1,13 +1,13 @@
-# 🚀 START HERE - Checkmate-Escrow Split
+# 🚀 START HERE - StellaRust Split
 
 ## ✅ What Just Happened?
 
-The Checkmate-Escrow monorepo has been **successfully divided** into two independent codebases:
+The StellaRust project (formerly Checkmate-Escrow) has been **successfully divided** into two independent codebases:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                                                         │
-│  Checkmate-Escrow (Original Monorepo)                  │
+│  StellaRust (Original Monorepo)                        │
 │  ├── contracts/                                         │
 │  ├── oracle-service/                                    │
 │  ├── frontend/                                          │
@@ -49,7 +49,7 @@ The Checkmate-Escrow monorepo has been **successfully divided** into two indepen
    - **Status**: Ready to run (needs Node.js installed)
 
 ### 3. **Checkmate-Escrow/** 📦
-   - Original monorepo (preserved as reference)
+   - Original repository (preserved for historical reference only)
 
 ---
 
@@ -151,7 +151,7 @@ npm run build                       # Build for production
 
 ## 💡 Key Points
 
-✅ **Original preserved** - `Checkmate-Escrow/` is untouched  
+✅ **Original preserved** - `Checkmate-Escrow/` is archived for reference  
 ✅ **Backend ready** - Just needs Rust installed  
 ✅ **Frontend ready** - Just needs Node.js installed  
 ✅ **Fully documented** - 7 guides created  

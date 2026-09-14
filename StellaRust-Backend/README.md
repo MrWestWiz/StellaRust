@@ -1,13 +1,13 @@
-# Checkmate-Escrow — Competitive Chess Betting on Stellar
+# StellaRust — Competitive Chess Betting on Stellar
 
-[![Code Coverage](https://github.com/meetdarc-tech/Checkmate-Escrow/actions/workflows/coverage.yml/badge.svg)](https://github.com/meetdarc-tech/Checkmate-Escrow/actions/workflows/coverage.yml)
+[![Code Coverage](https://github.com/MrWestWiz/StellaRust/actions/workflows/coverage.yml/badge.svg)](https://github.com/MrWestWiz/StellaRust/actions/workflows/coverage.yml)
 
 A trustless chess wagering platform built on Stellar Soroban smart contracts. Players stake tokens before a match, and the winner is automatically paid out the moment the game ends — no middleman, no delays, no trust required.
 
 
-## 🎯 What is Checkmate-Escrow?
+## 🎯 What is StellaRust?
 
-Checkmate-Escrow combines competitive chess with Stellar's fast settlement to create a fully on-chain betting platform for casual and high-stakes matches.
+StellaRust combines competitive chess with Stellar's fast settlement to create a fully on-chain betting platform for casual and high-stakes matches.
 
 Players:
 
@@ -17,7 +17,7 @@ Players:
 
 A custom Oracle bridges the Chess.com / Lichess API to the smart contract, verifying match results and triggering payouts without any manual intervention.
 
-This makes Checkmate-Escrow:
+This makes StellaRust:
 
 ✅ Trustless (no platform can withhold or delay winnings)  
 ✅ Transparent (all stakes and payouts are verifiable on-chain)  
@@ -70,7 +70,7 @@ Pending ──► Active ──► Completed
 
 ## 🛠️ Quick Start
 
-**New to Checkmate-Escrow?** Start with the [Local Development Setup](docs/local-dev.md) guide for step-by-step instructions on building, testing, and running the full stack locally — including [running the oracle service locally](docs/local-dev.md#running-the-oracle-service-locally) against a mock Lichess/Chess.com server.
+**New to StellaRust?** Start with the [Local Development Setup](docs/local-dev.md) guide for step-by-step instructions on building, testing, and running the full stack locally — including [running the oracle service locally](docs/local-dev.md#running-the-oracle-service-locally) against a mock Lichess/Chess.com server.
 
 ### Prerequisites
 
@@ -141,7 +141,7 @@ Follow the step-by-step guide in `demo/demo-script.md`
 
 ## 🎓 New here? Start with the Interactive Tutorial
 
-Brand new to Checkmate-Escrow? The **[Interactive Tutorial](docs/tutorial-step-by-step.md)**
+Brand new to StellaRust? The **[Interactive Tutorial](docs/tutorial-step-by-step.md)**
 takes you from zero to a completed, paid-out match on **testnet** in under 15
 minutes — no real funds at risk:
 
@@ -291,7 +291,7 @@ cargo test
 
 **The Problem**: Current chess betting and tournament prize payouts are slow and rely entirely on the platform's honesty. Players have no guarantee their winnings will be paid out fairly or on time.
 
-**The Solution**: By holding stakes in a Soroban smart contract and automating payouts via a verified Oracle, Checkmate-Escrow removes the need to trust any third party.
+**The Solution**: By holding stakes in a Soroban smart contract and automating payouts via a verified Oracle, StellaRust removes the need to trust any third party.
 
 **Blockchain Benefits**:
 

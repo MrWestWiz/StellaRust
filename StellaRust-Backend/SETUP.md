@@ -1,6 +1,6 @@
 # StellaRust Backend
 
-This is the **backend portion** of the Checkmate-Escrow project, containing:
+This is the **backend portion** of the StellaRust project, containing:
 - Rust smart contracts (Soroban)
 - Oracle service
 - Event indexer service

@@ -1,6 +1,6 @@
-# Checkmate-Escrow Frontend
+# StellaRust Frontend
 
-React + TypeScript + Vite frontend for the Checkmate-Escrow platform.
+React + TypeScript + Vite frontend for the StellaRust platform.
 
 ## Local Development
 

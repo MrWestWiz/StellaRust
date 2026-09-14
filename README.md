@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # StellaRust Workspace
 
-This workspace contains the Checkmate-Escrow project, split into separate backend and frontend codebases for independent development and deployment.
+This workspace contains the StellaRust project (formerly Checkmate-Escrow), split into separate backend and frontend codebases for independent development and deployment.
 
 ## 📁 Project Structure
 
@@ -11,8 +11,8 @@ StellaRust/
 ├── 📄 CODEBASE_SPLIT_SUMMARY.md    # Detailed split documentation
 ├── 📄 README.md                     # This file
 │
-├── 📂 Checkmate-Escrow/             # ✅ Original monorepo (preserved)
-│   └── Full project with all components
+├── 📂 Checkmate-Escrow/             # ✅ Original repository (archived)
+│   └── Historical reference - use StellaRust-Backend/Frontend instead
 │
 ├── 📂 StellaRust-Backend/           # 🚀 Backend (Rust + Smart Contracts)
 │   ├── contracts/                   # Soroban smart contracts
@@ -202,9 +202,10 @@ npm run dev
 
 ## 📦 Original Repository
 
-The original monorepo is preserved in `Checkmate-Escrow/` for reference.
+The original repository is preserved in `Checkmate-Escrow/` for historical reference only. All active development should use `StellaRust-Backend/` and `StellaRust-Frontend/`.
 
-**Original Source:** https://github.com/StellarCheckMate/Checkmate-Escrow.git
+**Original Source:** https://github.com/StellarCheckMate/Checkmate-Escrow.git  
+**Active Repository:** https://github.com/MrWestWiz/StellaRust
 
 ## 🤝 Contributing
 
