@@ -1,0 +1,211 @@
+use soroban_sdk::{contracttype, Address, String, Vec};
+
+/// Canonical result enum shared conceptually with the escrow contract.
+/// Variants mirror escrow's `Winner` enum for consistency.
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum Winner {
+    Player1,
+    Player2,
+    Draw,
+}
+
+/// Chess platform identifier. Mirrors escrow's `Platform` for cross-contract consistency.
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum Platform {
+    Lichess,
+    ChessDotCom,
+}
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct ResultEntry {
+    pub game_id: String,
+    pub platform: Platform,
+    pub result: Winner,
+    /// Ledger sequence number at which this result was submitted.
+    pub submitted_ledger: u32,
+    /// Address of the admin who submitted this result.
+    pub submitter: Address,
+    /// Optional confidence score (0-100) indicating result certainty.
+    pub confidence: Option<u8>,
+}
+
+/// A single entry in a batch result submission.
+#[contracttype]
+#[derive(Clone, Debug)]
+pub struct BatchResultEntry {
+    pub match_id: u64,
+    pub game_id: String,
+    pub platform: Platform,
+    pub result: Winner,
+    /// Optional confidence score (0-100) indicating result certainty.
+    pub confidence: Option<u8>,
+}
+
+#[contracttype]
+#[derive(Clone, Debug)]
+pub struct OracleRegistration {
+    pub oracle_address: Address,
+    pub oracle_stake: i128,
+    pub token: Address,
+}
+
+/// Metrics tracking and SLA performance indicators for a registered oracle.
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct OracleMetrics {
+    pub last_response_time_ms: u64,
+    pub avg_response_time_ms: u64,
+    pub uptime_percentage: u32,
+    pub total_submissions: u32,
+    pub successful_submissions: u32,
+    pub active: bool,
+}
+
+/// A single registered oracle's vote for a specific match, recorded so a
+/// second, conflicting submission from the same oracle for the same match
+/// can be detected as equivocation.
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct OracleVoteRecord {
+    pub game_id: String,
+    pub platform: Platform,
+    pub result: Winner,
+}
+
+/// One distinct (game_id, platform, result) candidate submitted for a match,
+/// and the set of independently-registered oracles that have voted for it.
+#[contracttype]
+#[derive(Clone, Debug)]
+pub struct CandidateTally {
+    pub game_id: String,
+    pub platform: Platform,
+    pub result: Winner,
+    pub submitters: Vec<Address>,
+}
+
+/// In-progress m-of-n consensus state for a match: every distinct candidate
+/// result submitted so far, and whether the match has been flagged as an
+/// irreconcilable dispute (no remaining eligible oracle vote could push any
+/// candidate over the configured threshold).
+#[contracttype]
+#[derive(Clone, Debug)]
+pub struct ConsensusState {
+    pub candidates: Vec<CandidateTally>,
+    pub disputed: bool,
+}
+
+#[contracttype]
+pub enum DataKey {
+    Admin,
+    Result(u64), // keyed by match_id
+    Paused,      // emergency pause state
+    /// Registered oracle staking information.
+    OracleRegistration(Address),
+    /// Per-oracle override of the default hourly/daily submission limits.
+    OracleRateLimit(Address),
+    /// Sliding window submission counters for the hourly limit, keyed by oracle address.
+    OracleHourlyWindow(Address),
+    /// Sliding window submission counters for the daily limit, keyed by oracle address.
+    OracleDailyWindow(Address),
+    Rate(Address, Address),
+    /// Number of matching independent-oracle submissions required to finalize
+    /// a match result via `submit_oracle_result`. Defaults to 1.
+    ConsensusThreshold,
+    /// Every address ever registered via `register_oracle_with_stake`.
+    OracleSet,
+    /// In-progress consensus tally for a match, keyed by match_id. Removed
+    /// once the match is finalized.
+    MatchVotes(u64),
+    /// A single oracle's recorded vote for a match, keyed by (match_id, oracle).
+    OracleVote(u64, Address),
+    /// Metrics tracking and SLA performance indicators for an oracle.
+    OracleMetrics(Address),
+    /// Cached result for a (game_id, platform) pair to avoid redundant lookups.
+    /// Stores `(Winner, expiry_timestamp)`.
+    OracleCache(String, Platform),
+    /// Ordered list of submission entries for a specific oracle address.
+    /// Stores `Vec<OracleSubmissionEntry>` indexed by the oracle's address.
+    OracleSubmissionList(Address),
+    /// Number of ledgers a slash must be staged for before it can be
+    /// finalized. Defaults to 0 (immediate finalization) if unset, which
+    /// preserves the pre-grace-period behavior.
+    SlashingGracePeriodLedgers,
+    /// A staged slash awaiting the grace period before it can be finalized,
+    /// keyed by (oracle_address, match_id).
+    PendingSlash(Address, u64),
+}
+
+/// A slash that has been staged but not yet finalized, pending
+/// `slashing_grace_period_ledgers` ledgers for governance to intervene via
+/// `admin_cancel_slash`.
+#[contracttype]
+#[derive(Clone, Debug)]
+pub struct PendingSlash {
+    pub oracle_address: Address,
+    pub match_id: u64,
+    pub slash_amount: i128,
+    pub token: Address,
+    /// Ledger sequence number at which the slash was staged.
+    pub staged_ledger: u32,
+    /// Ledger sequence number at which the slash becomes eligible for
+    /// finalization (`staged_ledger + slashing_grace_period_ledgers`).
+    pub eligible_ledger: u32,
+}
+
+/// A single entry in an oracle's per-address submission history.
+///
+/// Written to `DataKey::OracleSubmissionList(oracle)` whenever that oracle
+/// successfully records a result via `submit_result`, `submit_batch_results`,
+/// or `submit_oracle_result`.
+#[contracttype]
+#[derive(Clone, Debug)]
+pub struct OracleSubmissionEntry {
+    /// On-chain match identifier.
+    pub match_id: u64,
+    /// Platform-specific game identifier.
+    pub game_id: String,
+    /// The chess platform this result was sourced from.
+    pub platform: Platform,
+    /// The submitted match result.
+    pub result: Winner,
+    /// Ledger sequence number at which this submission was recorded.
+    pub submitted_ledger: u32,
+}
+
+/// Configurable submission limits for a single oracle address.
+#[contracttype]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RateLimitConfig {
+    pub hourly_limit: u32,
+    pub daily_limit: u32,
+}
+
+/// Sliding-window counter state for a single rate-limit window.
+///
+/// Uses the "sliding window counter" approximation: `current_count` tracks
+/// submissions since `window_start`, and `previous_count` carries the count
+/// from the immediately preceding window so it can be weighted by the
+/// fraction of that window which still overlaps the sliding lookback period.
+#[contracttype]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RateWindow {
+    pub window_start: u64,
+    pub current_count: u32,
+    pub previous_count: u32,
+}
+
+/// Point-in-time rate limit usage for a single oracle, returned to callers
+/// in lieu of HTTP rate-limit headers (there is no HTTP layer on-chain).
+#[contracttype]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RateLimitStatus {
+    pub hourly_used: u32,
+    pub hourly_limit: u32,
+    pub hourly_remaining: u32,
+    pub daily_used: u32,
+    pub daily_limit: u32,
+    pub daily_remaining: u32,
+}
